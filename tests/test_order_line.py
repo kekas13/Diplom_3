@@ -1,7 +1,6 @@
 import allure
 from pages.main_page import MainPage
 from pages.personal_area_page import PersonalAreaPage
-from locators.main_locators import MainLocators
 from urls import Urls
 
 
@@ -21,8 +20,8 @@ class TestOrderLine:
     @allure.description('Открываем страницу логина, логинимся, оформляем заказа, получаем номер заказа, '
                         'закрываем окно с заказом и нажимаем на кнопку "Лента заказов", '
                         'проверяем, что номер нашего заказа есть в ленте заказов')
-    def test_show_orders_on_order_line(self, login):
-        page = PersonalAreaPage(login)
+    def test_show_orders_on_order_line(self, personal_area_page):
+        page = PersonalAreaPage(personal_area_page)
         page.drag_ingredient_bun_to_order()
         page.drag_ingredient_sauce_to_order()
         page.click_make_order_button()
@@ -36,8 +35,8 @@ class TestOrderLine:
     @allure.description('Открываем страницу логина, логинимся, со страницы ленты заказов фиксируем общий счетчик '
                         'заказов "Выполнено за все время", на главной странице оформляем заказ, '
                         'нажимаем на ленту заказов, проверяем, что счетчик Выполнено за всё время увеличился на 1')
-    def test_add_order_alltime_counter_increase(self, login):
-        page = PersonalAreaPage(login)
+    def test_add_order_alltime_counter_increase(self, personal_area_page):
+        page = PersonalAreaPage(personal_area_page)
         page.click_order_line_button()
         alltime_counter = page.get_alltime_order_count()
         page.go_page(Urls.MAIN_PAGE)
@@ -52,8 +51,8 @@ class TestOrderLine:
     @allure.description('Открываем страницу логина, логинимся, со страницы ленты заказов фиксируем счетчик заказов '
                         'за сегодня "Выполнено за сегодня", на главной странице оформляем заказ, '
                         'нажимаем на ленту заказов, проверяем, что счетчик "Выполнено за сегодня" увеличился на 1')
-    def test_add_order_day_counter_increase(self, login):
-        page = PersonalAreaPage(login)
+    def test_add_order_day_counter_increase(self, personal_area_page):
+        page = PersonalAreaPage(personal_area_page)
         page.click_order_line_button()
         daily_counter = page.get_daily_order_count()
         page.go_page(Urls.MAIN_PAGE)
@@ -67,8 +66,8 @@ class TestOrderLine:
     @allure.title('Проверяем, что после оформления заказа его номер появляется в разделе В работе')
     @allure.description('Открываем страницу логина, логинимся, оформляем заказ, переходим в ленту заказов,'
                         'проверяем, что его номер заказа, появляется в разделе "В работе"')
-    def test_add_order_show_in_work(self, login):
-        page = PersonalAreaPage(login)
+    def test_add_order_show_in_work(self, personal_area_page):
+        page = PersonalAreaPage(personal_area_page)
         page.drag_ingredient_bun_to_order()
         page.drag_ingredient_sauce_to_order()
         page.click_make_order_button()

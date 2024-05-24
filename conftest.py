@@ -3,6 +3,7 @@ from selenium import webdriver
 from locators.login_page_locators import LoginPageLocators
 from data import Data
 from urls import Urls
+from pages.personal_area_page import PersonalAreaPage
 
 
 @pytest.fixture(params=['chrome'])
@@ -21,9 +22,10 @@ def driver(request):
 
 
 @pytest.fixture()
-def login(driver):
+def personal_area_page(driver):
     driver.get(Urls.LOGIN_PAGE)
-    driver.find_element(*LoginPageLocators.INPUT_MAIL).send_keys(Data.EMAIL)
-    driver.find_element(*LoginPageLocators.INPUT_PASSWORD).send_keys(Data.PASSWORD)
-    driver.find_element(*LoginPageLocators.ENTER_BUTTON).click()
+    login_page = PersonalAreaPage(driver)
+    login_page.set_email(Data.EMAIL)
+    login_page.set_password(Data.PASSWORD)
+    login_page.click_enter_button()
     return driver
