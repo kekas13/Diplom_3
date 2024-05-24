@@ -45,9 +45,15 @@ class MainPage(BasePage):
     def find_order_details(self):
         return self.find_element(MainLocators.ORDER_DETAILS_POP_UP)
 
-    @allure.step('Перетаскиваем ингредиент в заказ')
-    def drag_ingredient_to_order(self, element):
-        drag = self.find_element(element)
+    @allure.step('Перетаскиваем ингредиент "булка" в заказ')
+    def drag_ingredient_bun_to_order(self):
+        drag = self.find_element(MainLocators.ORDER_LINE_ELEMENT_BUN)
+        drop = self.find_element(MainLocators.ORDER)
+        self.drag_and_drop(drag, drop)
+
+    @allure.step('Перетаскиваем ингредиент "соус" в заказ')
+    def drag_ingredient_sauce_to_order(self):
+        drag = self.find_element(MainLocators.ORDER_LINE_ELEMENT_SAUCE)
         drop = self.find_element(MainLocators.ORDER)
         self.drag_and_drop(drag, drop)
 
